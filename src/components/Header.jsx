@@ -6,20 +6,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import headerLogo from "../animations/headerLogo.json";
 import Lottie from "lottie-react";
-
 const Header = () => {
   const [toggle, setToggle] = useState(false);
   const { logout, user } = UserAuth();
-
   const toggleChangeHandler = () => {
     setToggle(!toggle);
   };
 
   return (
     <header className="header max-w-[1240px] mx-auto w-full flex items-center justify-between px-4  box-border py-2 shadow-md">
-      <Link 
-      to="/"
-       className="flex items-center">
+      <Link to="/" className="flex items-center">
         <Lottie
           className="w-[62px] h-auto"
           animationData={headerLogo}
@@ -30,22 +26,23 @@ const Header = () => {
         </h1>
       </Link>
 
-      {user != null ? (
+      {user ? (
         <nav className={`${toggle == true ? "opened" : "closed"} navbar`}>
           <ul className="flex gap-6 items-center">
             <li>
-              <Link 
-              to='/'
-               className="header-link font-primaryFont text-[18px] text-slate-800 tracking-wide	 font-bold ">
+              <Link
+                to="/"
+                className="header-link font-primaryFont text-[18px] text-slate-800 tracking-wide	 font-bold "
+              >
                 {" "}
                 Watch List{" "}
               </Link>
             </li>
             <li>
-              <Link 
-              to='/'
-              
-              className="header-link font-primaryFont tracking-wide	 text-[18px] text-slate-800 font-bold ">
+              <Link
+                to="/"
+                className="header-link font-primaryFont tracking-wide	 text-[18px] text-slate-800 font-bold "
+              >
                 {" "}
                 Watched List{" "}
               </Link>

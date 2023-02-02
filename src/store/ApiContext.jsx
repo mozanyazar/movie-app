@@ -21,7 +21,10 @@ export const ApiContextProvider = ({ children }) => {
     }
   };
   useEffect(() => {
-    getMovie();
+    if(movieSlider.length > 0) return
+    else{
+      getMovie({});
+    }
   }, []);
   const values = {
     movieSlider,

@@ -28,12 +28,25 @@ function App() {
             </Suspense>
           }
         />
-        <Route path="/createAccount" element={<CreateAccount />} />
+        <Route
+          path="/createAccount"
+          element={
+            <ProtectedRoute>
+              <CreateAccount />
+            </ProtectedRoute>
+          }
+        />
 
         <Route
           path="/signIn"
           element={
-            <Suspense fallback={<LoadingAnimation />}>{<SignIn />}</Suspense>
+            <Suspense fallback={<LoadingAnimation />}>
+              {
+                <ProtectedRoute>
+                  <SignIn />
+                </ProtectedRoute>
+              }
+            </Suspense>
           }
         />
 
