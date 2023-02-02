@@ -1,0 +1,115 @@
+.header-link {
+  transition: all 0.3s ease;
+  position: relative;
+}
+.header-link::before {
+  transition: all 0.3s ease;
+
+  width: 0;
+  bottom: -3px;
+  height: 2px;
+  left: 0;
+  background-color: #1992b2;
+  content: "";
+  position: absolute;
+}
+.header-link:hover::before {
+  width: 100%;
+}
+.logo {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.navbar .search-header {
+  display: none;
+}
+
+.hamburger {
+  display: none;
+}
+@media screen and (max-width: 1150px) {
+  .search-header input {
+    width: 245px;
+  }
+  .navbar ul li a {
+    font-size: 16px;
+  }
+  .navbar ul {
+    gap: 12px;
+  }
+  .header {
+    padding: 0 10px !important;
+  }
+}
+@media screen and (max-width: 900px) {
+  .button-group {
+    position: fixed;
+    right: -100%;
+    top: 100px;
+    z-index: 999;
+    flex-direction: column;
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 25px;
+    box-shadow: 0px 0px 5px 5px #3333;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .button-group.opened {
+    right: 1%;
+  }
+  .hamburger {
+    display: block;
+  }
+  .navbar {
+    position: fixed;
+    right: -100%;
+    top: 100px;
+    z-index: 99;
+    width: 300px;
+    height: max-content;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ededed;
+    border-radius: 14px;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    box-shadow: 1px 10px 13px #333;
+  }
+  .opened.navbar {
+    right: 1%;
+  }
+  .closed.navbar {
+    right: -100%;
+  }
+  .navbar ul {
+    flex-direction: column;
+    gap: 13px;
+    width: 100%;
+  }
+  .navbar ul li {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .navbar ul li a {
+    padding: 10px 0;
+    width: 100%;
+  }
+  .header-link:hover::before {
+    width: 59%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+@media screen and (max-width: 700px) {
+  .navbar .search-header.search-header-mob {
+    display: flex !important;
+  }
+  .navbar .search-header.search-header-mob input {
+    width: 200px;
+  }
+}

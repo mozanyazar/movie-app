@@ -1,70 +1,130 @@
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Solitreo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+@layer components {
+  .form-wrapper {
+    @apply flex flex-col gap-0 w-full py-1;
+  }
+  .form-label {
+    @apply font-secondaryFont text-base font-medium text-slate-700 max-[900px]:text-sm;
+  }
+  .form-input {
+    @apply bg-transparent border-b-2 border-slate-800 pl-2 py-1 outline-none  text-slate-900 italic;
+  }
 }
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+* {
   margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+/* header */
+
+/* body {
+  font-family: "Solitreo", cursive;
+} */
+
+.background-gradiant {
+  /* background: #ddd6f3;
+  background: -webkit-linear-gradient(
+    to right,
+    #faaca8,
+    #ddd6f3
+  ); 
+  background: linear-gradient(
+    to right,
+    #faaca8,
+    #ddd6f3
+  );  */
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 70px);
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: url(./pics/movie-bg.jpg) no-repeat;
+  background-size: cover;
+}
+.background-gradiant::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.message-modal {
+  padding: 22px 60px !important;
+  height: auto;
+  max-width: 340px;
+  min-width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+  top: 10px;
+  z-index: 9999999;
+  border-radius: 17px;
+}
+.message-modal button {
+  font-size: 35px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.message-modal h1 {
+  color: #fff;
+}
+.message-modal.succes {
+  background-color: rgb(87, 202, 87);
+}
+.message-modal.error {
+  background-color: rgb(230, 42, 28);
+}
+.message-modal.opened {
+  right: 10px;
+}
+.message-modal.closed {
+  right: -100%;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.animation-wrapper {
+  height: calc(100vh - 70px);
+  background-color: rgb(14, 116, 144);
+}
+.search-slogan {
+  font-size: 38px;
+  background: #ffefba; /* fallback for old browsers */
+  background: linear-gradient(to right, #825d90, #20002c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  height: 200px !important;
 }
