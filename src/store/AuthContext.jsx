@@ -17,16 +17,15 @@ export const AuthContextProvider = ({ children }) => {
     isSucces: false,
   });
   const navigate = useNavigate();
-
   useEffect(() => {
-    const isUser = () =>
-      onAuthStateChanged(auth, (currrentUser) => {
-        setUser(auth.currentUser);
-      });
-    return () => {
-      isUser();
-    };
-  });
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
 
   const updateProfileSignIn = (name) =>
     updateProfile(auth.currentUser, {
