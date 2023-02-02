@@ -1,22 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { UserAuth } from "../store/AuthContext";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Message = () => {
   const { message, setMessage } = UserAuth();
+  useEffect(() => {
+    if (message.message != undefined) {
+      if (!message.isSucces) {
+        toast.error(message.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          icon: true,
+        });
+      } else if (message.isSucces) {
+        toast.success(message.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          icon: true,
+        });
+      }
+    } else return;
+  }, [message]);
   return (
-    <div
-      className={`text-[17px] font-secondaryFont message-modal ${
-        message.isSucces ? "succes" : "error"
-      } ${message.message == undefined ? "closed" : "opened"}`}
-    >
-      <h1>{message.message}</h1>
-      <button
-        onClick={() => setMessage({ message: undefined, isSucces: false })}
-      >
-        <AiFillCloseCircle color="black" />
-      </button>
-    </div>
+    <>
+      <ToastContainer icon={false} />
+    </>
   );
 };
 
