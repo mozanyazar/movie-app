@@ -16,6 +16,7 @@ export const AuthContextProvider = ({ children }) => {
     message: undefined,
     isSucces: false,
   });
+
   const navigate = useNavigate();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
