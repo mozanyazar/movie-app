@@ -8,6 +8,8 @@ import {
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
+import { collection, addDoc, setDoc, doc, Timestamp } from "firebase/firestore";
+import { db } from "../firebase";
 
 const UserContext = createContext();
 export const AuthContextProvider = ({ children }) => {
@@ -16,8 +18,8 @@ export const AuthContextProvider = ({ children }) => {
     message: undefined,
     isSucces: false,
   });
-
   const navigate = useNavigate();
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -39,9 +41,24 @@ export const AuthContextProvider = ({ children }) => {
         console.log(error.message);
       });
 
+  const creatingDbCollections = async (user, email, name) => {
+    const ref = doc(db, "users", user.uid);
+    const docRef = await setDoc(ref, {
+      isAdmin: false,
+      email,
+      name,
+      created: Timestamp.now(),
+    });
+    setDoc(doc(db, "posts", user.uid), {
+      watchList: [],
+      watchedList: [],
+    });
+  };
+
   const createUser = (email, password, name) => {
     createUserWithEmailAndPassword(auth, email, password)
-      .then(async (userCredential) => {
+      .then((userCredential) => {
+        creatingDbCollections(userCredential.user, email, name);
         setMessage({
           message: "profile created !",
           isSucces: true,

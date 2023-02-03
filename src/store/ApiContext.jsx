@@ -1,11 +1,12 @@
-import { async } from "@firebase/util";
 import { createContext, useContext, useState, useEffect } from "react";
-
+import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { UserAuth } from "./AuthContext";
 const ApiContext = createContext();
 
 export const ApiContextProvider = ({ children }) => {
+  const { user } = UserAuth();
   const [movieSlider, setMovieSlider] = useState({});
-
   let apiKey = "51db2db0dbf922780da412df07374cb6";
 
   const getMovie = async () => {
@@ -15,15 +16,14 @@ export const ApiContextProvider = ({ children }) => {
       );
       const data = await res.json();
       setMovieSlider(data.results);
-      console.log(data.results);
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
-    if(movieSlider.length > 0) return
-    else{
-      getMovie({});
+    if (movieSlider.length > 0) return;
+    else {
+      getMovie();
     }
   }, []);
   const values = {
