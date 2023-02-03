@@ -1,0 +1,87 @@
+.mySwiper.home-page-slider {
+  width: 1240px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  border: 1px solid #000;
+  height: 360px;
+  position: relative;
+  background: #0f2027;
+  background: -webkit-linear-gradient(to top, #2c5364, #203a43, #0f2027);
+  background: linear-gradient(to top, #2c5364, #203a43, #0f2027);
+  cursor: pointer;
+}
+.swiper-slide .slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.swiper-button-prev,
+.swiper-button-next {
+  color: #fff;
+}
+.slider-texts-wrapper {
+  font-family: "Poppins", sans-serif;
+  position: absolute;
+  bottom: -100%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.281);
+  width: 100%;
+  transition: all 0.5s ease;
+}
+.swiper-slide:hover .slider-texts-wrapper {
+  bottom: 0;
+  transition: all 0.5s ease;
+  position: absolute;
+  background: #0f2027;
+  background: -webkit-linear-gradient(to top, #2c5364, #203a43, #0f2027);
+  background: linear-gradient(to top, #2c5364, #203a43, #0f2027);
+  color: #fff;
+}
+.slider-texts-wrapper .slider-title {
+  font-size: 16px;
+  padding: 10px 0 20px 0;
+}
+.slider-title-group > span b {
+  background-color: #0f2027;
+  box-shadow: 2px 2px 1px #2c5364;
+  border-radius: 50%;
+  padding: 10px;
+}
+.button-group-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  box-sizing: border-box;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+.button-group-slide button {
+  padding: 8px 10px;
+  background-color: #2c5364;
+  box-shadow: 3px 5px 2px #0f2027;
+  font-size: 14px;
+  transition: all 0.24s ease-in-out;
+}
+.button-group-slide button:hover {
+  background-color: #2c53648b;
+  color: aliceblue;
+}
+@media screen and (min-width: 300px) and (max-width: 600px) {
+  .mySwiper.home-page-slider {
+    width: 99%;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 1240px) {
+  .mySwiper.home-page-slider {
+    width: 95%;
+  }
+}
