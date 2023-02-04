@@ -14,14 +14,14 @@ const Header = () => {
   };
 
   return (
-    <header className="header max-w-[1240px] mx-auto w-full flex items-center justify-between px-4  box-border py-2 shadow-md">
+    <header className="header max-w-[1240px] mx-auto w-full flex items-center justify-between px-4  box-border py-2 shadow-md bg-slate-100">
       <Link to="/" className="flex items-center">
         <Lottie
           className="w-[62px] h-auto"
           animationData={headerLogo}
           loop={true}
         />
-        <h1 className="logo  bg-gradient-to-r from-cyan-500 to-blue-500 font-primaryFont text-[34px] font-semibold ">
+        <h1 className="logo bg-gradient-to-r from-cyan-500 to-blue-500 font-primaryFont text-[34px] font-semibold ">
           <span className="">Find</span> Movie
         </h1>
       </Link>
