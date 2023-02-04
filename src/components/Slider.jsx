@@ -2,16 +2,15 @@ import React, { useEffect } from "react";
 import { ApiStore } from "../store/ApiContext";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Pagination, Navigation } from "swiper";
+import { Navigation } from "swiper";
 import "../css/Slider.css";
-import { UserAuth } from "../store/AuthContext";
 import { WatchListStore } from "../store/WatchListContext";
+import { useNavigate } from "react-router-dom";
 const Slider = () => {
-  const { movieSlider, dataSnapShot } = ApiStore();
+  const { movieSlider } = ApiStore();
   const { WatchListHandler } = WatchListStore();
-
+  let navigate = useNavigate();
   return (
     <>
       <Swiper
@@ -66,7 +65,12 @@ const Slider = () => {
                   </span>
                 </div>
                 <div className="button-group-slide">
-                  <button onClick={dataSnapShot} className="read-more">
+                  <button
+                    onClick={() =>
+                      navigate(`/movies/${element.title}/${element.id}`)
+                    }
+                    className="read-more"
+                  >
                     Read More
                   </button>
                   <button
