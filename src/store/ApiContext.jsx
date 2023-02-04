@@ -9,7 +9,7 @@ export const ApiContextProvider = ({ children }) => {
   const [movieSlider, setMovieSlider] = useState({});
   let apiKey = "51db2db0dbf922780da412df07374cb6";
 
-  const getMovie = async () => {
+  const sliderMovieData = async () => {
     try {
       let res = await fetch(
         `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`
