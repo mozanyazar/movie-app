@@ -6,7 +6,7 @@ const Home = () => {
   const { user } = UserAuth();
   return (
     <div className=" max-w-[1240px] mx-auto">
-      <MovieSearch />
+      {/* <MovieSearch /> */}
       <Slider />
     </div>
   );
