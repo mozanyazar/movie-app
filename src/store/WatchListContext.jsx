@@ -7,7 +7,7 @@ const WatchListContext = createContext();
 export const WatchListContextProvider = ({ children }) => {
   const { user, setMessage } = UserAuth();
 
-  const snapShotWatchList = async (movie) => {
+  const addWatchList = async (movie) => {
     try {
       const userWatchList = doc(db, "posts", user.uid);
       await updateDoc(userWatchList, {
@@ -34,13 +34,14 @@ export const WatchListContextProvider = ({ children }) => {
 
     if (docSnap.exists()) {
       if ((docSnap.data().watchList.length = 0)) {
-        snapShotWatchList(movie);
+        addWatchList(movie);
       } else {
         const checkMovieExist = docSnap
           .data()
           .watchList.find((e) => e.id === movie.id);
+
         if (checkMovieExist == undefined) {
-          return snapShotWatchList(movie);
+          return addWatchList(movie);
         } else if (checkMovieExist !== undefined) {
           setMessage({
             isSucces: false,
@@ -48,8 +49,6 @@ export const WatchListContextProvider = ({ children }) => {
           });
         }
       }
-    } else {
-      console.log("No such document!");
     }
   };
 
