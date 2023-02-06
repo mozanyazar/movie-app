@@ -8,11 +8,19 @@ import {
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
-import { collection, addDoc, setDoc, doc, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  setDoc,
+  doc,
+  Timestamp,
+  getDoc,
+} from "firebase/firestore";
 import { db } from "../firebase";
 
 const UserContext = createContext();
 export const AuthContextProvider = ({ children }) => {
+  const [watchList, setWatchList] = useState([]);
   const [user, setUser] = useState({});
   const [message, setMessage] = useState({
     message: undefined,
@@ -21,10 +29,18 @@ export const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       if (user) {
         setUser(user);
+        const docRef = doc(db, "posts", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          console.log(docSnap.data().watchList);
+          setWatchList(docSnap.data().watchList);
+        }
       } else {
+        setWatchList([]);
+        console.log(watchList);
         setUser(null);
       }
     });
@@ -93,6 +109,7 @@ export const AuthContextProvider = ({ children }) => {
   const logout = () => {
     signOut(auth)
       .then(() => {
+        //watch list temizlenmeli
         setMessage({
           message: "Logout successful !",
           isSucces: true,
@@ -114,6 +131,8 @@ export const AuthContextProvider = ({ children }) => {
     setMessage,
     user,
     setUser,
+    setWatchList,
+    watchList,
   };
   return (
     <UserContext.Provider value={{ ...values }}>

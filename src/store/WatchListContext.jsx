@@ -1,11 +1,12 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { UserAuth } from "./AuthContext";
 import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
+
 const WatchListContext = createContext();
 
 export const WatchListContextProvider = ({ children }) => {
-  const { user, setMessage } = UserAuth();
+  const { user, setMessage, setWatchList, watchList } = UserAuth();
 
   const addWatchList = async (movie) => {
     try {
@@ -15,6 +16,7 @@ export const WatchListContextProvider = ({ children }) => {
           ...movie,
         }),
       }).then(() => {
+        setWatchList((prev) => [...prev, movie]);
         setMessage({
           message: "succesfull!",
           isSucces: true,
@@ -29,25 +31,17 @@ export const WatchListContextProvider = ({ children }) => {
   };
 
   const addWatchListController = async (movie) => {
-    const docRef = doc(db, "posts", user.uid);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      if ((docSnap.data().watchList.length = 0)) {
-        addWatchList(movie);
-      } else {
-        const checkMovieExist = docSnap
-          .data()
-          .watchList.find((e) => e.id === movie.id);
-
-        if (checkMovieExist == undefined) {
-          return addWatchList(movie);
-        } else if (checkMovieExist !== undefined) {
-          setMessage({
-            isSucces: false,
-            message: "Already exist! ",
-          });
-        }
+    if (watchList.length == 0) {
+      addWatchList(movie);
+    } else if (watchList.length > 0) {
+      const checkMovieExist = watchList.find((e) => e.id === movie.id);
+      if (checkMovieExist == undefined) {
+        return addWatchList(movie);
+      } else if (checkMovieExist !== undefined) {
+        setMessage({
+          isSucces: false,
+          message: "Already exist! ",
+        });
       }
     }
   };
@@ -65,6 +59,7 @@ export const WatchListContextProvider = ({ children }) => {
 
   const values = {
     WatchListHandler,
+    watchList,
   };
 
   return (
