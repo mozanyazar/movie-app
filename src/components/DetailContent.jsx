@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { UserAuth } from "../store/AuthContext";
 import { WatchListStore } from "../store/WatchListContext";
 
 const DetailContent = ({ detailMovie }) => {
   const { WatchListHandler } = WatchListStore();
+  const { user } = UserAuth();
+  let navigate = useNavigate();
+
   return (
     <div>
       {detailMovie &&
@@ -22,12 +27,21 @@ const DetailContent = ({ detailMovie }) => {
                     {" "}
                     {movie.original_title}{" "}
                   </h1>
-                  <button
-                    onClick={() => WatchListHandler(movie.id)}
-                    className="bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-150 ease-out text-slate-100 font-semibold py-2 px-4 rounded-2xl shadow-lg hover:scale-105 max-[900px]:text-base max-[900px]:mb-5 "
-                  >
-                    Add Watch List
-                  </button>
+                  {user ? (
+                    <button
+                      onClick={() => WatchListHandler(movie)}
+                      className="bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-150 ease-out text-slate-100 font-semibold py-2 px-4 rounded-2xl shadow-lg hover:scale-105 max-[900px]:text-base max-[900px]:mb-5 "
+                    >
+                      Add Watch List
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => navigate("/")}
+                      className="bg-gradient-to-r from-[#ededed] to-blue-300 transition-all duration-150 ease-out text-slate-900 border-2 border-slate-300  font-semibold py-2 px-4 rounded-2xl shadow-lg hover:scale-105 max-[900px]:text-base max-[900px]:mb-5 "
+                    >
+                      Login
+                    </button>
+                  )}
                 </div>
                 <p className="text-lg text-slate-600 max-[900px]:text-base max-[900px]:mb-4 max-[900px]:text-justify">
                   {movie.overview} <br />
