@@ -7,10 +7,14 @@ import { Navigation } from "swiper";
 import "../css/Slider.css";
 import { WatchListStore } from "../store/WatchListContext";
 import { useNavigate } from "react-router-dom";
+import headerLogo from "../animations/headerLogo.json";
+import Lottie from "lottie-react";
+
 const Slider = () => {
-  const { movieSlider } = ApiStore();
+  const { movieSlider, sliderLoading, setSliderLoading } = ApiStore();
   const { WatchListHandler } = WatchListStore();
   let navigate = useNavigate();
+
   return (
     <>
       <Swiper
@@ -47,7 +51,16 @@ const Slider = () => {
           },
         }}
       >
-        {movieSlider.length > 0 &&
+        {!sliderLoading ? (
+          <div className="min-h-[360px] shadow-xl bg-[#203a43] flex items-center justify-center text-4xl text-white">
+            <Lottie
+              className="w-[162px] h-auto"
+              animationData={headerLogo}
+              loop={true}
+            />
+          </div>
+        ) : (
+          movieSlider.length > 0 &&
           movieSlider.map((element) => (
             <SwiperSlide key={element.id}>
               <img
@@ -82,7 +95,8 @@ const Slider = () => {
                 </div>
               </div>
             </SwiperSlide>
-          ))}
+          ))
+        )}
       </Swiper>
     </>
   );

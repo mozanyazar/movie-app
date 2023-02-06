@@ -109,7 +109,6 @@ export const AuthContextProvider = ({ children }) => {
   const logout = () => {
     signOut(auth)
       .then(() => {
-        //watch list temizlenmeli
         setMessage({
           message: "Logout successful !",
           isSucces: true,

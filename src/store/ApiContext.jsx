@@ -5,6 +5,7 @@ const ApiContext = createContext();
 export const ApiContextProvider = ({ children }) => {
   const { user } = UserAuth();
   const [movieSlider, setMovieSlider] = useState({});
+  const [sliderLoading, setSliderLoading] = useState(false);
   let apiKey = "43eab74a0e3371f45b9f10216d3d2a40";
 
   const sliderMovieData = async () => {
@@ -14,6 +15,7 @@ export const ApiContextProvider = ({ children }) => {
       );
       const data = await res.json();
       setMovieSlider(data.results);
+      setSliderLoading(true);
     } catch (error) {
       console.log(error);
     }
@@ -26,6 +28,8 @@ export const ApiContextProvider = ({ children }) => {
   }, []);
   const values = {
     movieSlider,
+    sliderLoading,
+    setSliderLoading,
   };
 
   return (
