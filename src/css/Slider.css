@@ -1,8 +1,8 @@
 .mySwiper.home-page-slider {
-  width: 1240px;
+  width: 1200px;
   margin: 0 auto;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 .swiper-slide {
@@ -82,6 +82,6 @@
 }
 @media screen and (min-width: 600px) and (max-width: 1240px) {
   .mySwiper.home-page-slider {
-    width: 95%;
+    width: 100%;
   }
 }

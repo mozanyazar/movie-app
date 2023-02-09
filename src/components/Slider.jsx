@@ -17,6 +17,7 @@ const Slider = () => {
 
   return (
     <>
+    <p className=" font-secondaryFont text-[28px] text-stone-700 font-black ">Popular Movie</p>
       <Swiper
         slidesPerView={4}
         spaceBetween={10}
@@ -87,7 +88,7 @@ const Slider = () => {
                     Read More
                   </button>
                   <button
-                    onClick={() => WatchListHandler(element)}
+                    onClick={() => WatchListHandler(element, element.id)}
                     className="add-watch-list"
                   >
                     Add Watch List
@@ -96,7 +97,8 @@ const Slider = () => {
               </div>
             </SwiperSlide>
           ))
-        )}
+        )
+        }
       </Swiper>
     </>
   );

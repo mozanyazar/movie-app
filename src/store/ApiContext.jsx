@@ -5,8 +5,21 @@ const ApiContext = createContext();
 export const ApiContextProvider = ({ children }) => {
   const { user } = UserAuth();
   const [movieSlider, setMovieSlider] = useState({});
+  const [topRatedMovies, setTopRatedMovies] = useState({});
   const [sliderLoading, setSliderLoading] = useState(false);
   let apiKey = "43eab74a0e3371f45b9f10216d3d2a40";
+
+  const fetchCards = async () => {
+    try {
+      let res = await fetch(
+        `https://api.themoviedb.org/3/tv/top_rated?api_key=${apiKey}&language=en-US&page=1`
+      );
+      const data = await res.json();
+      setTopRatedMovies(data.results);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
   const sliderMovieData = async () => {
     try {
@@ -16,10 +29,12 @@ export const ApiContextProvider = ({ children }) => {
       const data = await res.json();
       setMovieSlider(data.results);
       setSliderLoading(true);
+      fetchCards();
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
     if (movieSlider.length > 0) return;
     else {
@@ -29,6 +44,8 @@ export const ApiContextProvider = ({ children }) => {
   const values = {
     movieSlider,
     sliderLoading,
+    topRatedMovies,
+    setTopRatedMovies,
     setSliderLoading,
   };
 

@@ -31,7 +31,7 @@ const Header = () => {
           <ul className="flex gap-6 items-center">
             <li>
               <Link
-                to="/"
+                to="/watchlist"
                 className="header-link font-primaryFont text-[18px] text-slate-800 tracking-wide	 font-bold "
               >
                 {" "}
@@ -40,7 +40,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                to="/"
+                to="/watchedlist"
                 className="header-link font-primaryFont tracking-wide	 text-[18px] text-slate-800 font-bold "
               >
                 {" "}

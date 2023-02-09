@@ -7,11 +7,14 @@ import NotFound from "./pages/NotFound";
 import Message from "./components/Message";
 import LoadingAnimation from "./components/LoadingAnimation";
 import { ApiContextProvider } from "./store/ApiContext";
+import { SearchPage } from "./pages/SearchPage";
 function App() {
   const SignIn = React.lazy(() => import("./pages/SignIn"));
   const Home = React.lazy(() => import("./pages/Home"));
   const DetailPage = React.lazy(() => import("./pages/DetailPage"));
-  const { movieName, movieId } = useParams();
+  const WatchListPage = React.lazy(() => import("./pages/WatchListPage"));
+  const WatchedListPage = React.lazy(() => import("./pages/WatchedListPage"));
+
   return (
     <>
       <Message />
@@ -50,12 +53,38 @@ function App() {
             </Suspense>
           }
         />
+        <Route
+          path="/watchlist"
+          element={
+            <Suspense fallback={<LoadingAnimation />}>
+              {<WatchListPage />}
+            </Suspense>
+          }
+        />
+        <Route
+          path="/watchedlist"
+          element={
+            <Suspense fallback={<LoadingAnimation />}>
+              {<WatchedListPage />}
+            </Suspense>
+          }
+        />
         <Route path="movies/:movieName">
           <Route
             path=":movieId"
             element={
               <Suspense fallback={<LoadingAnimation />}>
                 <DetailPage />
+              </Suspense>
+            }
+          />
+        </Route>
+        <Route path="searchmovies">
+          <Route
+            path=":searchText"
+            element={
+              <Suspense fallback={<LoadingAnimation />}>
+                <SearchPage />
               </Suspense>
             }
           />
