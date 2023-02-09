@@ -13,11 +13,11 @@ const DetailPage = () => {
   const [loading, setLoading] = useState(false);
 
   let apiKey = "43eab74a0e3371f45b9f10216d3d2a40";
-
   const findMovie = async (movieName, movieId) => {
     try {
       let res = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${movieName}`
+        // `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${movieName}`
+        `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&language=en-US&query=${movieName}&page=1`
       );
       const data = await res.json();
       if (data.results.length > 1) {
