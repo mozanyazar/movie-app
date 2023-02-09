@@ -14,11 +14,16 @@ const DetailComments = ({ movieId }) => {
     let userId = user.uid;
     try {
       const movieComments = doc(db, "comments", movieId);
+      const date = new Date();
+      // const currentDate = ;
       await updateDoc(movieComments, {
         comments: arrayUnion({
           name,
           userId,
           comment,
+          date: `${date.getDate()}/${
+            date.getMonth() + 1
+          }/${date.getFullYear()}`,
         }),
       }).then(() => {
         if (anyComment == false) {
@@ -27,6 +32,9 @@ const DetailComments = ({ movieId }) => {
               name: name,
               userId: userId,
               comment: comment,
+              date: `${date.getDate()}/${
+                date.getMonth() + 1
+              }/${date.getFullYear()}`,
             },
           ]);
           setAnyComment(true);
@@ -37,9 +45,14 @@ const DetailComments = ({ movieId }) => {
               name: name,
               userId: userId,
               comment: comment,
+
+              date: `${date.getDate()}/${
+                date.getMonth() + 1
+              }/${date.getFullYear()}`,
             },
           ]);
         }
+        setComment("");
         setAnyComment(true);
         setMessage({
           message: "succesfull!",
@@ -100,6 +113,7 @@ const DetailComments = ({ movieId }) => {
 
       <form onSubmit={newCommentHandler}>
         <textarea
+          value={comment}
           disabled={!user}
           onChange={(e) => setComment(e.target.value)}
           name="comment"
@@ -125,8 +139,29 @@ const DetailComments = ({ movieId }) => {
         ) : (
           <div>
             {anyComment == true && allComments != undefined ? (
-              allComments.map((message, index) => {
-                return <p key={index}>{message.comment}</p>;
+              allComments.map((el, index) => {
+                return (
+                  <div
+                    className="flex gap-4 px-2 mb-2 py-3 border-1 border-slate-400 border rounded-2xl shadow-md"
+                    key={index}
+                  >
+                    <div>
+                      <div class="h-[60px] w-[60px] bg-gray-50 rounded-full relative overflow-hidden">
+                        <div class="w-[30px] h-[30px] bg-slate-500 rounded-full absolute left-1/2 translate-x-[-50%] translate-y-[-50%] top-1/2 z-40"></div>
+                        <div class="w-[40px] h-[32px] bg-slate-300 rounded-full absolute left-1/2 translate-x-[-50%] translate-y-[-50%] top-[53px]"></div>
+                      </div>
+                      <p className="text-center mt-1 capitalize">{el.name}</p>
+                    </div>
+                    <div className="flex justify-between w-full">
+                      <p className="mt-2 text-md italic text-slate-600 font-secondaryFont">
+                        {el.comment}
+                      </p>
+                      <span className="text-md text-indigo-900 font-secondaryFont px-2 py-1 bg-slate-400 h-max rounded-2xl">
+                        {el.date}
+                      </span>
+                    </div>
+                  </div>
+                );
               })
             ) : (
               <p className=" text-base text-slate-900 font-secondaryFont">

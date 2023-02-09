@@ -24,8 +24,7 @@ const DetailContent = ({ detailMovie }) => {
               <div className="flex flex-col g-5 font-secondaryFont  max-[1240px]:w-[95%] max-[1240px]:mx-auto">
                 <div className="flex justify-between items-center">
                   <h1 className="text-2xl mb-3 font-semibold text-slate-700 uppercase max-[900px]:text-xl">
-                    {" "}
-                    {movie.original_title}{" "}
+                    {movie.original_title ? movie.original_title : movie.name}
                   </h1>
                   {user ? (
                     <button
