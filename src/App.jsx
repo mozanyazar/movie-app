@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Route, Routes, useParams } from "react-router-dom";
-import ProtectedRoute from "./protectedRoute/protectedRoute";
+import ProtectedRoute from "./protectedRoute/ProtectedRoute";
 import CreateAccount from "./pages/CreateAccount";
 import Header from "./components/Header";
 import NotFound from "./pages/NotFound";
