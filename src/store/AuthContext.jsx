@@ -20,7 +20,8 @@ import { db } from "../firebase";
 
 const UserContext = createContext();
 export const AuthContextProvider = ({ children }) => {
-  const [watchList, setWatchList] = useState([]);
+  const [watchList, setWatchList] = useState(null);
+  const [watchedList, setWatchedList] = useState(null);
   const [user, setUser] = useState({});
   const [message, setMessage] = useState({
     message: undefined,
@@ -32,15 +33,23 @@ export const AuthContextProvider = ({ children }) => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         setUser(user);
-        const docRef = doc(db, "posts", user.uid);
-        const docSnap = await getDoc(docRef);
+        const WatchListSnapShot = doc(db, "watchList", user.uid);
+        const WatchedListSnapShot = doc(db, "watchedList", user.uid);
+        const docSnap = await getDoc(WatchListSnapShot);
         if (docSnap.exists()) {
           console.log(docSnap.data().watchList);
           setWatchList(docSnap.data().watchList);
         }
+        const docSnap2 = await getDoc(WatchedListSnapShot);
+        if (docSnap2.exists()) {
+          console.log(docSnap2.data().watchedList);
+          setWatchedList(docSnap2.data().watchedList);
+        }
       } else {
         setWatchList([]);
+        setWatchedList([]);
         console.log(watchList);
+        console.log(watchedList);
         setUser(null);
       }
     });
@@ -65,8 +74,10 @@ export const AuthContextProvider = ({ children }) => {
       name,
       created: Timestamp.now(),
     });
-    setDoc(doc(db, "posts", user.uid), {
+    setDoc(doc(db, "watchList", user.uid), {
       watchList: [],
+    });
+    setDoc(doc(db, "watchedList", user.uid), {
       watchedList: [],
     });
   };
@@ -132,6 +143,8 @@ export const AuthContextProvider = ({ children }) => {
     setUser,
     setWatchList,
     watchList,
+    watchedList,
+    setWatchedList,
   };
   return (
     <UserContext.Provider value={{ ...values }}>

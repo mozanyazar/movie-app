@@ -1,16 +1,104 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { UserAuth } from "./AuthContext";
-import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
+import {
+  doc,
+  updateDoc,
+  arrayUnion,
+  getDoc,
+  deleteField,
+  arrayRemove,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "../firebase";
 
 const WatchListContext = createContext();
 
 export const WatchListContextProvider = ({ children }) => {
-  const { user, setMessage, setWatchList, watchList } = UserAuth();
+  const {
+    user,
+    setMessage,
+    setWatchList,
+    watchList,
+    watchedList,
+    setWatchedList,
+  } = UserAuth();
 
-  const addWatchList = async (movie) => {
+  //remove watched list //
+
+  const removeTheWatchedList = async (movie) => {
+    const filterWatchedList = watchedList.filter((e) => e.id != movie.id);
+    const userWatchedList = doc(db, "watchedList", user.uid);
+    setWatchedList(filterWatchedList);
+    await updateDoc(userWatchedList, {
+      watchedList: filterWatchedList,
+    })
+      .then(() => {
+        setMessage({
+          message: `${
+            movie.original_title ? movie.original_title : movie.name
+          } has been removed to watched list`,
+          isSucces: true,
+        });
+      })
+      .catch((e) => {
+        setMessage({
+          message: `${error.message}`,
+          isSucces: false,
+        });
+      });
+  };
+
+  //remove watch list //
+
+  const removeTheWatchList = async (movie) => {
+    const filterWatchList = watchList.filter((e) => e.id != movie.id);
+    const userWatchList = doc(db, "watchList", user.uid);
+    setWatchList(filterWatchList);
+    await updateDoc(userWatchList, {
+      watchList: filterWatchList,
+    })
+      .then(() => {
+        setMessage({
+          message: `${
+            movie.original_title ? movie.original_title : movie.name
+          } has been removed to watch list`,
+          isSucces: true,
+        });
+      })
+      .catch((e) => {
+        setMessage({
+          message: `${error.message}`,
+          isSucces: false,
+        });
+      });
+  };
+
+  // add to watched list
+  const addToWatchedList = async (movie) => {
     try {
-      const userWatchList = doc(db, "posts", user.uid);
+      const compareWithWatchedList = watchedList.find((e) => e.id == movie.id);
+      console.log(compareWithWatchedList);
+      if (compareWithWatchedList) {
+        return setMessage({ isSucces: false, message: "already exist..." });
+      }
+
+      const userWatchedList = doc(db, "watchedList", user.uid);
+      await updateDoc(userWatchedList, {
+        watchedList: arrayUnion({
+          ...movie,
+        }),
+      });
+      setWatchedList((prev) => [...prev, movie]);
+      removeTheWatchList(movie);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const addWatchList = async (movie, movieId) => {
+    try {
+      const userWatchList = doc(db, "watchList", user.uid);
+
       await updateDoc(userWatchList, {
         watchList: arrayUnion({
           ...movie,
@@ -31,18 +119,31 @@ export const WatchListContextProvider = ({ children }) => {
   };
 
   const addWatchListController = async (movie) => {
-    if (watchList.length == 0) {
+    const allReadyExistWatchList = watchList.find((e) => e.id === movie.id);
+    const allReadyExistWatchedList = watchedList.find((e) => e.id === movie.id);
+    console.log(allReadyExistWatchList);
+    console.log(allReadyExistWatchedList);
+    if (
+      allReadyExistWatchList == undefined &&
+      allReadyExistWatchedList == undefined
+    ) {
       addWatchList(movie);
-    } else if (watchList.length > 0) {
-      const checkMovieExist = watchList.find((e) => e.id === movie.id);
-      if (checkMovieExist == undefined) {
-        return addWatchList(movie);
-      } else if (checkMovieExist !== undefined) {
-        setMessage({
-          isSucces: false,
-          message: "Already exist! ",
-        });
-      }
+    } else if (
+      allReadyExistWatchList != undefined &&
+      allReadyExistWatchedList == undefined
+    ) {
+      setMessage({
+        isSucces: false,
+        message: "Already exist your watch list !",
+      });
+    } else if (
+      allReadyExistWatchList == undefined &&
+      allReadyExistWatchedList != undefined
+    ) {
+      setMessage({
+        isSucces: false,
+        message: "You already watched this movie! ",
+      });
     }
   };
 
@@ -60,6 +161,9 @@ export const WatchListContextProvider = ({ children }) => {
   const values = {
     WatchListHandler,
     watchList,
+    addToWatchedList,
+    removeTheWatchList,
+    removeTheWatchedList,
   };
 
   return (
