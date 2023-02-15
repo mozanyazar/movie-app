@@ -11,6 +11,7 @@ export const SearchPage = () => {
   const [innerSearchText, setInnerSearchText] = useState("");
   let apiKey = "43eab74a0e3371f45b9f10216d3d2a40";
   const navigate = useNavigate();
+
   const findMovie = async (query) => {
     console.log("find movie func");
     try {
@@ -25,19 +26,19 @@ export const SearchPage = () => {
       console.log("error");
     }
   };
+
   const searchMovieHandler = (e) => {
     e.preventDefault();
     if (innerSearchText.trim() != "") {
-      setLoading(false);
-      setTimeout(() => {
-        findMovie(innerSearchText);
-      }, 1000);
+      navigate(`/searchmovies/${innerSearchText}`, {
+        replace: true,
+      });
       setInnerSearchText("");
     }
   };
   useEffect(() => {
     findMovie(searchText);
-  }, []);
+  }, [searchText]);
 
   return (
     <div
