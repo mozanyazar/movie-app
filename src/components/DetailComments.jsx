@@ -12,10 +12,10 @@ const DetailComments = ({ movieId }) => {
   const creatingCollectionForMovie = async () => {
     let name = user.displayName;
     let userId = user.uid;
+    setLoading(false);
     try {
       const movieComments = doc(db, "comments", movieId);
       const date = new Date();
-      // const currentDate = ;
       await updateDoc(movieComments, {
         comments: arrayUnion({
           name,
@@ -54,6 +54,8 @@ const DetailComments = ({ movieId }) => {
         }
         setComment("");
         setAnyComment(true);
+        setLoading(true);
+
         setMessage({
           message: "succesfull!",
           isSucces: true,
