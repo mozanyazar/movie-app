@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import Lottie from "lottie-react";
-import WomanMovie from "../animations/WomanMovie.json";
-import WomanMovie2 from "../animations/WomanMovie2.json";
-import { useNavigate } from "react-router-dom";
-import { UserAuth } from "../store/AuthContext";
+import React, { useState } from 'react'
+import Lottie from 'lottie-react'
+import WomanMovie from '../animations/WomanMovie.json'
+import WomanMovie2 from '../animations/WomanMovie2.json'
+import { useNavigate } from 'react-router-dom'
+import { UserAuth } from '../store/AuthContext'
 
 const MovieSearch = () => {
-  const navigate = useNavigate();
-  const [searchText, setSearchText] = useState("");
-  const { setMessage } = UserAuth();
+  const navigate = useNavigate()
+  const [searchText, setSearchText] = useState('')
+  const { setMessage } = UserAuth()
 
   const toSearchInnerPage = (ev) => {
-    ev.preventDefault();
-    if (searchText.trim() !== "") {
-      navigate(`searchmovies/${searchText}`);
+    ev.preventDefault()
+    if (searchText.trim() !== '') {
+      navigate(`searchmovies/${searchText}`)
     } else {
       setMessage({
         isSucces: false,
-        message: "please type it!",
-      });
+        message: 'please type it!',
+      })
     }
-  };
+  }
   return (
     <div className="flex justify-center items-center">
       <form
@@ -41,7 +41,7 @@ const MovieSearch = () => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default MovieSearch;
+export default MovieSearch

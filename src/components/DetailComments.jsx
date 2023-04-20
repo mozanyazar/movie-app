@@ -1,21 +1,21 @@
-import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { UserAuth } from "../store/AuthContext";
-import { db } from "../firebase";
+import { arrayUnion, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
+import React, { useEffect, useState } from 'react'
+import { UserAuth } from '../store/AuthContext'
+import { db } from '../firebase'
 const DetailComments = ({ movieId }) => {
-  const { setMessage, user } = UserAuth();
-  const [allComments, setAllComments] = useState([{}]);
-  const [anyComment, setAnyComment] = useState(false);
-  const [comment, setComment] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { setMessage, user } = UserAuth()
+  const [allComments, setAllComments] = useState([{}])
+  const [anyComment, setAnyComment] = useState(false)
+  const [comment, setComment] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const creatingCollectionForMovie = async () => {
-    let name = user.displayName;
-    let userId = user.uid;
-    setLoading(false);
+    let name = user.displayName
+    let userId = user.uid
+    setLoading(false)
     try {
-      const movieComments = doc(db, "comments", movieId);
-      const date = new Date();
+      const movieComments = doc(db, 'comments', movieId)
+      const date = new Date()
       await updateDoc(movieComments, {
         comments: arrayUnion({
           name,
@@ -36,8 +36,8 @@ const DetailComments = ({ movieId }) => {
                 date.getMonth() + 1
               }/${date.getFullYear()}`,
             },
-          ]);
-          setAnyComment(true);
+          ])
+          setAnyComment(true)
         } else if (anyComment == true) {
           setAllComments((prev) => [
             ...prev,
@@ -50,54 +50,54 @@ const DetailComments = ({ movieId }) => {
                 date.getMonth() + 1
               }/${date.getFullYear()}`,
             },
-          ]);
+          ])
         }
-        setComment("");
-        setAnyComment(true);
-        setLoading(true);
+        setComment('')
+        setAnyComment(true)
+        setLoading(true)
 
         setMessage({
-          message: "succesfull!",
+          message: 'succesfull!',
           isSucces: true,
-        });
-      });
+        })
+      })
     } catch (e) {
       setMessage({
-        message: "Error, try again!",
+        message: 'Error, try again!',
         isSucces: false,
-      });
+      })
     }
-  };
+  }
 
   const CommentsSnapShot = async () => {
-    const docRef = doc(db, "comments", movieId);
-    const docSnap = await getDoc(docRef);
+    const docRef = doc(db, 'comments', movieId)
+    const docSnap = await getDoc(docRef)
     if (docSnap.exists()) {
-      setAllComments(docSnap.data().comments);
-      setLoading(true);
-      setAnyComment(true);
-      console.log("commentsSnapShot true !");
+      setAllComments(docSnap.data().comments)
+      setLoading(true)
+      setAnyComment(true)
+      console.log('commentsSnapShot true !')
     } else {
-      setDoc(doc(db, "comments", movieId), {});
-      setLoading(true);
-      setAnyComment(false);
+      setDoc(doc(db, 'comments', movieId), {})
+      setLoading(true)
+      setAnyComment(false)
     }
-  };
+  }
 
   const newCommentHandler = (e) => {
-    e.preventDefault();
-    if (comment.trim() != "" && user != null) {
-      creatingCollectionForMovie();
-    } else if (comment.trim() == "") {
+    e.preventDefault()
+    if (comment.trim() != '' && user != null) {
+      creatingCollectionForMovie()
+    } else if (comment.trim() == '') {
       setMessage({
         isSucces: false,
-        message: "comments can not be emty",
-      });
+        message: 'comments can not be emty',
+      })
     }
-  };
+  }
   useEffect(() => {
-    CommentsSnapShot();
-  }, []);
+    CommentsSnapShot()
+  }, [])
 
   return (
     <div className="bg-slate-200 p-5 box-border mb-10 shadow-2xl">
@@ -120,21 +120,21 @@ const DetailComments = ({ movieId }) => {
           onChange={(e) => setComment(e.target.value)}
           name="comment"
           className={`pl-4 pt-2 max-h-[350px] min-h-[80px] w-full ${
-            !user && "bg-slate-300"
+            !user && 'bg-slate-300'
           } `}
-          placeholder={!user ? "you have to login" : "enter your comment !"}
+          placeholder={!user ? 'you have to login' : 'enter your comment !'}
         ></textarea>
         <button
           disabled={!user}
           type="submit"
           className="py-2 min-w-[230px] flex justify-center px-5 rounded-2xl bg-slate-300 mb-4 shadow-xl self-end w-max max-[576px]:self-start max-[576px]:w-full"
         >
-          {user ? "Submit" : "Login"}
+          {user ? 'Submit' : 'Login'}
         </button>
       </form>
       <div className="flex flex-col gap-3">
         <h3 className="text-lg text-slate-600 font-secondaryFont">
-          All Comments{" "}
+          All Comments{' '}
         </h3>
         {loading == false ? (
           <div>Loading ...</div>
@@ -163,7 +163,7 @@ const DetailComments = ({ movieId }) => {
                       </span>
                     </div>
                   </div>
-                );
+                )
               })
             ) : (
               <p className=" text-base text-slate-900 font-secondaryFont">
@@ -174,7 +174,7 @@ const DetailComments = ({ movieId }) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DetailComments;
+export default DetailComments

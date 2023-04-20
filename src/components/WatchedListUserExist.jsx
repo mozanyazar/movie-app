@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { UserAuth } from "../store/AuthContext";
-import headerLogo from "../animations/headerLogo.json";
-import Lottie from "lottie-react";
-import { WatchListStore } from "../store/WatchListContext";
+import React, { useEffect, useState } from 'react'
+import { UserAuth } from '../store/AuthContext'
+import headerLogo from '../animations/headerLogo.json'
+import Lottie from 'lottie-react'
+import { WatchListStore } from '../store/WatchListContext'
 const WatchedListUserExist = () => {
-  const { watchedList, user } = UserAuth();
-  const { removeTheWatchedList } = WatchListStore();
+  const { watchedList, user } = UserAuth()
+  const { removeTheWatchedList } = WatchListStore()
 
   return (
     <div>
       {watchedList == null ? (
         <div
-          style={{ height: "calc(100vh - 78px)" }}
+          style={{ height: 'calc(100vh - 78px)' }}
           className="w-full bg-slate-400 flex items-center justify-center"
         >
           <div className="p-10 bg-slate-700 rounded-full">
@@ -24,7 +24,7 @@ const WatchedListUserExist = () => {
         </div>
       ) : (
         <div
-          style={{ minHeight: "calc(100vh - 78px)" }}
+          style={{ minHeight: 'calc(100vh - 78px)' }}
           className="bg-slate-200 pt-5"
         >
           <h1 className=" font-secondaryFont shadow-stone-600 w-9/12 mx-auto shadow capitalize text-center text-4xl mb-3 font-semibold text-stone-700 max-[900px]:text-xl">
@@ -42,11 +42,11 @@ const WatchedListUserExist = () => {
                     />
                     <div>
                       <h2 className="text-2xl mb-3 font-semibold text-slate-700 uppercase max-[900px]:text-xl">
-                        {" "}
-                        {el.original_title}{" "}
+                        {' '}
+                        {el.original_title}{' '}
                       </h2>
                       <p className="text-md text-slate-600  max-[900px]:mb-4 max-[900px]:text-justify max-[900px]:text-sm">
-                        {" "}
+                        {' '}
                         {el.overview}
                       </p>
                       <div className="flex items-center pt-3 justify-end pr-2 gap-6 max-[780px]:gap-2  max-[780px]:justify-start">
@@ -68,7 +68,7 @@ const WatchedListUserExist = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default WatchedListUserExist;
+export default WatchedListUserExist

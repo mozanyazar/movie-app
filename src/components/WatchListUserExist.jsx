@@ -27,7 +27,9 @@ const WatchListUserExist = () => {
           style={{ minHeight: "calc(100vh - 78px)" }}
           className="bg-slate-200 pt-5"
         >
-           <h1 className=" font-secondaryFont shadow-stone-600 w-9/12 mx-auto shadow capitalize text-center text-4xl mb-3 font-semibold text-stone-700 max-[900px]:text-xl">Your Watch List</h1>
+          <h1 className=" font-secondaryFont shadow-stone-600 w-9/12 mx-auto shadow capitalize text-center text-4xl mb-3 font-semibold text-stone-700 max-[900px]:text-xl">
+            Your Watch List
+          </h1>
           {watchList.length > 0 ? (
             <div className="flex flex-col ">
               {watchList.map((el) => (

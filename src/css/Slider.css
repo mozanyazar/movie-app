@@ -27,7 +27,7 @@
   color: #fff;
 }
 .slider-texts-wrapper {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   position: absolute;
   bottom: -100%;
   display: flex;

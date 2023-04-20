@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { UserAuth } from "../store/AuthContext";
-import { WatchListStore } from "../store/WatchListContext";
+import React, { useEffect } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { UserAuth } from '../store/AuthContext'
+import { WatchListStore } from '../store/WatchListContext'
 
 const DetailContent = ({ detailMovie }) => {
-  const { WatchListHandler } = WatchListStore();
-  const { user } = UserAuth();
-  let navigate = useNavigate();
+  const { WatchListHandler } = WatchListStore()
+  const { user } = UserAuth()
+  let navigate = useNavigate()
 
   return (
     <div>
@@ -35,7 +35,7 @@ const DetailContent = ({ detailMovie }) => {
                     </button>
                   ) : (
                     <button
-                      onClick={() => navigate("/")}
+                      onClick={() => navigate('/')}
                       className="bg-gradient-to-r from-[#ededed] to-blue-300 transition-all duration-150 ease-out text-slate-900 border-2 border-slate-300  font-semibold py-2 px-4 rounded-2xl shadow-lg hover:scale-105 max-[900px]:text-base max-[900px]:mb-5 "
                     >
                       Login
@@ -55,8 +55,8 @@ const DetailContent = ({ detailMovie }) => {
                   </span>
                 </p>
                 <span className="py-2 min-w-[230px] flex justify-center px-5 rounded-2xl bg-slate-300 mb-4 shadow-xl self-end w-max max-[576px]:self-start max-[576px]:w-full">
-                  {" "}
-                  Original Language: <b>{movie.original_language}</b>{" "}
+                  {' '}
+                  Original Language: <b>{movie.original_language}</b>{' '}
                 </span>
                 <span className="py-2 min-w-[230px] flex justify-center px-5 rounded-2xl bg-slate-300 mb-4 shadow-xl self-end w-max max-[576px]:self-start max-[576px]:w-full">
                   Release date: <b>{movie.release_date}</b>
@@ -66,10 +66,10 @@ const DetailContent = ({ detailMovie }) => {
                 </span>
               </div>
             </div>
-          );
+          )
         })}
     </div>
-  );
-};
+  )
+}
 
-export default DetailContent;
+export default DetailContent

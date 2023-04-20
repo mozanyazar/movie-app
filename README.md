@@ -8,15 +8,13 @@ The main focus of this project was to learn React, so I did not spend much time 
 
 ## I used the following tools and technologies
 
-- Formik and Yup for form validation 
+- Formik and Yup for form validation
 - Context for state management.
 - firebase firestore for the db
 - Firebase Auth for registration processes.
 - tailwind css
-- react-toastify 
+- react-toastify
 - react-router-dom (useNavigate & useParams)
-
-
 
 ## FEATURES
 
@@ -30,10 +28,10 @@ The main focus of this project was to learn React, so I did not spend much time 
 
 - You can also search for movies.
 
-# comments 
+# comments
+
 ![comment](https://user-images.githubusercontent.com/101927776/218274633-01424b3d-a931-4920-aedb-f51d74557d69.png)
 
-
-
 # detail page
+
 ![detail](https://user-images.githubusercontent.com/101927776/218274644-22fd3dff-fac5-4a25-a12b-c4ea2e49a338.png)

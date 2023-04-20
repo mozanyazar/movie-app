@@ -1,48 +1,48 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import LoadingAnimation from "../components/LoadingAnimation";
-import { WatchListStore } from "../store/WatchListContext";
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import LoadingAnimation from '../components/LoadingAnimation'
+import { WatchListStore } from '../store/WatchListContext'
 
 export const SearchPage = () => {
-  const { WatchListHandler } = WatchListStore();
-  const { searchText } = useParams();
-  const [searchMovie, setSearchMovie] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [innerSearchText, setInnerSearchText] = useState("");
-  let apiKey = "43eab74a0e3371f45b9f10216d3d2a40";
-  const navigate = useNavigate();
+  const { WatchListHandler } = WatchListStore()
+  const { searchText } = useParams()
+  const [searchMovie, setSearchMovie] = useState({})
+  const [loading, setLoading] = useState(false)
+  const [innerSearchText, setInnerSearchText] = useState('')
+  let apiKey = '43eab74a0e3371f45b9f10216d3d2a40'
+  const navigate = useNavigate()
 
   const findMovie = async (query) => {
-    console.log("find movie func");
+    console.log('find movie func')
     try {
       let res = await fetch(
         `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&language=en-US&query=${query}&page=1`
-      );
-      const data = await res.json();
-      setSearchMovie(data.results);
-      console.log(data.results);
-      setLoading(true);
+      )
+      const data = await res.json()
+      setSearchMovie(data.results)
+      console.log(data.results)
+      setLoading(true)
     } catch (error) {
-      console.log("error");
+      console.log('error')
     }
-  };
+  }
 
   const searchMovieHandler = (e) => {
-    e.preventDefault();
-    if (innerSearchText.trim() != "") {
+    e.preventDefault()
+    if (innerSearchText.trim() != '') {
       navigate(`/searchmovies/${innerSearchText}`, {
         replace: true,
-      });
-      setInnerSearchText("");
+      })
+      setInnerSearchText('')
     }
-  };
+  }
   useEffect(() => {
-    findMovie(searchText);
-  }, [searchText]);
+    findMovie(searchText)
+  }, [searchText])
 
   return (
     <div
-      style={{ minHeight: "calc(100vh - 78px)" }}
+      style={{ minHeight: 'calc(100vh - 78px)' }}
       className="max-w-[1240px] mx-auto  bg-slate-200 shadow-2xl"
     >
       <div className="pt-2 flex flex-col justify-center items-center gap-5">
@@ -89,12 +89,12 @@ export const SearchPage = () => {
 
               <div>
                 <h2 className="text-2xl mb-3 font-semibold text-slate-700 uppercase max-[900px]:text-xl">
-                  {" "}
+                  {' '}
                   {el.original_title}
                   {el.name}
                 </h2>
                 <p className="text-md text-slate-600  max-[900px]:mb-4 max-[900px]:text-justify max-[900px]:text-sm">
-                  {" "}
+                  {' '}
                   {el.overview}
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
                   porro tempore, voluptate debitis repudiandae officiis dolor
@@ -124,5 +124,5 @@ export const SearchPage = () => {
         ))
       )}
     </div>
-  );
-};
+  )
+}

@@ -10,7 +10,7 @@
   height: 2px;
   left: 0;
   background-color: #1992b2;
-  content: "";
+  content: '';
   position: absolute;
 }
 .header-link:hover::before {

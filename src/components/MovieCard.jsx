@@ -1,40 +1,40 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ApiStore } from "../store/ApiContext";
-import { UserAuth } from "../store/AuthContext";
-import { WatchListStore } from "../store/WatchListContext";
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { ApiStore } from '../store/ApiContext'
+import { UserAuth } from '../store/AuthContext'
+import { WatchListStore } from '../store/WatchListContext'
 
 const MovieCard = ({ movie }) => {
-  const { topRatedMovies, setTopRatedMovies } = ApiStore();
-  const { WatchListHandler } = WatchListStore();
-  const { watchList, user, watchedList } = UserAuth();
+  const { topRatedMovies, setTopRatedMovies } = ApiStore()
+  const { WatchListHandler } = WatchListStore()
+  const { watchList, user, watchedList } = UserAuth()
   const [isValid, setIsValid] = useState({
     inWatchList: false,
     inWatchedList: false,
-  });
-  let navigate = useNavigate();
+  })
+  let navigate = useNavigate()
   // || watchedList.length > 0
   useEffect(() => {
     if (user !== null) {
-      if (watchList === null) return;
-      const findInWatchList = watchList.find((e) => e.id === movie.id);
+      if (watchList === null) return
+      const findInWatchList = watchList.find((e) => e.id === movie.id)
       if (findInWatchList !== undefined) {
         return setIsValid({
           inWatchList: true,
           inWatchedList: false,
-        });
+        })
       }
     }
     if (watchedList !== null) {
-      const findInWatchedList = watchedList.find((e) => e.id === movie.id);
+      const findInWatchedList = watchedList.find((e) => e.id === movie.id)
       if (findInWatchedList !== undefined) {
         return setIsValid({
           inWatchList: false,
           inWatchedList: true,
-        });
+        })
       }
     }
-  }, [watchList, watchedList]);
+  }, [watchList, watchedList])
 
   return (
     <div
@@ -43,8 +43,8 @@ const MovieCard = ({ movie }) => {
     >
       <div>
         <p className="text-center py-2 font-secondaryFont font-semibold text-xl text-slate-900">
-          {" "}
-          {movie.name}{" "}
+          {' '}
+          {movie.name}{' '}
         </p>
         <img
           className="h-auto w-[220px] rounded-xl text-center mx-auto "
@@ -65,12 +65,12 @@ const MovieCard = ({ movie }) => {
           className=" px-2 py-2 shadow-sm shadow-neutral-50 font-secondaryFont text-base text-slate-800  bg-neutral-100 rounded-xl hover:bg-slate-900 hover:text-slate-50 duration-300 transition-all ease-out"
         >
           {isValid.inWatchList === true || isValid.inWatchedList === true
-            ? "already added"
-            : "Add watch list"}
+            ? 'already added'
+            : 'Add watch list'}
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MovieCard;
+export default MovieCard

@@ -1,26 +1,26 @@
-import React, { useContext, useState, useEffect } from "react";
-import * as yup from "yup";
-import { UserAuth } from "../store/AuthContext";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState, useEffect } from 'react'
+import * as yup from 'yup'
+import { UserAuth } from '../store/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
-  const { SignInWithEmail, user } = UserAuth();
-  const navigate = useNavigate();
-  const [Singinemail, setSigninEmail] = useState("");
-  const [Signinpassword, setSigninPassword] = useState("");
+  const { SignInWithEmail, user } = UserAuth()
+  const navigate = useNavigate()
+  const [Singinemail, setSigninEmail] = useState('')
+  const [Signinpassword, setSigninPassword] = useState('')
 
   const SignInHandler = async (e) => {
-    e.preventDefault();
-    console.log(Singinemail);
-    console.log(Signinpassword);
+    e.preventDefault()
+    console.log(Singinemail)
+    console.log(Signinpassword)
 
     try {
-      console.log("islem devm ediyor");
-      await SignInWithEmail(Singinemail, Signinpassword);
+      console.log('islem devm ediyor')
+      await SignInWithEmail(Singinemail, Signinpassword)
     } catch (err) {
-      console.log(err.message);
+      console.log(err.message)
     }
-  };
+  }
 
   return (
     <>
@@ -30,9 +30,15 @@ const SignIn = () => {
           <h1 className=" pt-5 pb-4 text-center font-primaryFont font-semibold text-titleSize text-slate-800 tracking-wide max-[400px]:text-lg">
             Sign in & Talks About Movies
           </h1>
-          <form onSubmit={SignInHandler} className="flex flex-col gap-2 ">
+          <form
+            onSubmit={SignInHandler}
+            className="flex flex-col gap-2 "
+          >
             <div className="form-wrapper">
-              <label className="form-label" htmlFor="email">
+              <label
+                className="form-label"
+                htmlFor="email"
+              >
                 Email
               </label>
               <input
@@ -44,7 +50,10 @@ const SignIn = () => {
               />
             </div>
             <div className="form-wrapper">
-              <label className="form-label" htmlFor="password">
+              <label
+                className="form-label"
+                htmlFor="password"
+              >
                 Password
               </label>
               <input
@@ -64,7 +73,7 @@ const SignIn = () => {
               Sign In
             </button>
             <button
-              onClick={() => navigate("/createAccount")}
+              onClick={() => navigate('/createAccount')}
               className="p-1 py-2 mt-3  text-slate-900 w-1/2 self-center underline"
             >
               Create Account
@@ -73,7 +82,7 @@ const SignIn = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default SignIn;
+export default SignIn

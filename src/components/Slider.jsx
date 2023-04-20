@@ -1,23 +1,25 @@
-import React, { useEffect } from "react";
-import { ApiStore } from "../store/ApiContext";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import { Navigation } from "swiper";
-import "../css/Slider.css";
-import { WatchListStore } from "../store/WatchListContext";
-import { useNavigate } from "react-router-dom";
-import headerLogo from "../animations/headerLogo.json";
-import Lottie from "lottie-react";
+import React, { useEffect } from 'react'
+import { ApiStore } from '../store/ApiContext'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import { Navigation } from 'swiper'
+import '../css/Slider.css'
+import { WatchListStore } from '../store/WatchListContext'
+import { useNavigate } from 'react-router-dom'
+import headerLogo from '../animations/headerLogo.json'
+import Lottie from 'lottie-react'
 
 const Slider = () => {
-  const { movieSlider, sliderLoading, setSliderLoading } = ApiStore();
-  const { WatchListHandler } = WatchListStore();
-  let navigate = useNavigate();
+  const { movieSlider, sliderLoading, setSliderLoading } = ApiStore()
+  const { WatchListHandler } = WatchListStore()
+  let navigate = useNavigate()
 
   return (
     <>
-    <p className=" font-secondaryFont text-[28px] text-stone-700 font-black ">Popular Movie</p>
+      <p className=" font-secondaryFont text-[28px] text-stone-700 font-black ">
+        Popular Movie
+      </p>
       <Swiper
         slidesPerView={4}
         spaceBetween={10}
@@ -74,8 +76,8 @@ const Slider = () => {
                 <div className="slider-title-group">
                   <h5 className="slider-title">{element.original_title}</h5>
                   <span>
-                    {" "}
-                    Rate : <b>{element.vote_average}</b>{" "}
+                    {' '}
+                    Rate : <b>{element.vote_average}</b>{' '}
                   </span>
                 </div>
                 <div className="button-group-slide">
@@ -97,11 +99,10 @@ const Slider = () => {
               </div>
             </SwiperSlide>
           ))
-        )
-        }
+        )}
       </Swiper>
     </>
-  );
-};
+  )
+}
 
-export default Slider;
+export default Slider

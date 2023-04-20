@@ -1,44 +1,44 @@
-import React, { useContext } from "react";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import { useState } from "react";
-import { UserAuth } from "../store/AuthContext";
-import { useNavigate } from "react-router-dom";
-import bgImage from "../pics/movie-bg.jpg";
+import React, { useContext } from 'react'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+import { useState } from 'react'
+import { UserAuth } from '../store/AuthContext'
+import { useNavigate } from 'react-router-dom'
+import bgImage from '../pics/movie-bg.jpg'
 const CreateAccount = () => {
-  const { createUser, isUser } = UserAuth();
-  const navigate = useNavigate();
+  const { createUser, isUser } = UserAuth()
+  const navigate = useNavigate()
 
   const handleFormSubmit = async (values, actions) => {
     try {
-      await createUser(values.email, values.password, values.name);
+      await createUser(values.email, values.password, values.name)
     } catch (err) {
-      console.log(err.message);
+      console.log(err.message)
     }
-    actions.resetForm();
-  };
+    actions.resetForm()
+  }
 
   const validationSchema = yup.object().shape({
     name: yup.string().required().min(3),
     email: yup.string().email().required(),
     password: yup
       .string()
-      .min(6, "Password must be min 6 character")
+      .min(6, 'Password must be min 6 character')
       .required(),
     confirmPassword: yup
       .string()
-      .oneOf([yup.ref("password"), null], "password must match"),
-  });
+      .oneOf([yup.ref('password'), null], 'password must match'),
+  })
   const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues: {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
     onSubmit: handleFormSubmit,
     validationSchema: validationSchema,
-  });
+  })
   return (
     <div className="background-gradiant">
       <div className="bg-create-account"></div>
@@ -46,7 +46,10 @@ const CreateAccount = () => {
         <h1 className=" pt-5 pb-4 text-center font-primaryFont font-semibold text-titleSize text-slate-800 tracking-wide max-[400px]:text-lg">
           Create Account & Talks About Movies
         </h1>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-2 ">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-2 "
+        >
           <div className="form-wrapper">
             <label
               className="form-label font-['Poppins', sans-serif]"
@@ -63,7 +66,10 @@ const CreateAccount = () => {
             />
           </div>
           <div className="form-wrapper">
-            <label className="form-label" htmlFor="email">
+            <label
+              className="form-label"
+              htmlFor="email"
+            >
               Email
             </label>
             <input
@@ -75,7 +81,10 @@ const CreateAccount = () => {
             />
           </div>
           <div className="form-wrapper">
-            <label className="form-label" htmlFor="password">
+            <label
+              className="form-label"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
@@ -87,7 +96,10 @@ const CreateAccount = () => {
             />
           </div>
           <div className="form-wrapper">
-            <label className="form-label" htmlFor="password">
+            <label
+              className="form-label"
+              htmlFor="password"
+            >
               Password Confirm
             </label>
             <input
@@ -105,7 +117,7 @@ const CreateAccount = () => {
             Create Account
           </button>
           <button
-            onClick={() => navigate("/signin")}
+            onClick={() => navigate('/signin')}
             className="p-1 py-2 mt-3  text-slate-900 w-1/2 self-center underline"
           >
             already have an account ?
@@ -113,7 +125,7 @@ const CreateAccount = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CreateAccount;
+export default CreateAccount

@@ -1,21 +1,24 @@
-import React, { useEffect } from "react";
-import { UserAuth } from "../store/AuthContext";
-import "../css/Header.css";
-import { TfiMenu, TfiClose } from "react-icons/tfi";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import headerLogo from "../animations/headerLogo.json";
-import Lottie from "lottie-react";
+import React, { useEffect } from 'react'
+import { UserAuth } from '../store/AuthContext'
+import '../css/Header.css'
+import { TfiMenu, TfiClose } from 'react-icons/tfi'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import headerLogo from '../animations/headerLogo.json'
+import Lottie from 'lottie-react'
 const Header = () => {
-  const [toggle, setToggle] = useState(false);
-  const { logout, user } = UserAuth();
+  const [toggle, setToggle] = useState(false)
+  const { logout, user } = UserAuth()
   const toggleChangeHandler = () => {
-    setToggle(!toggle);
-  };
+    setToggle(!toggle)
+  }
 
   return (
     <header className="header max-w-[1240px] mx-auto w-full flex items-center justify-between px-4  box-border py-2 shadow-md bg-slate-100">
-      <Link to="/" className="flex items-center">
+      <Link
+        to="/"
+        className="flex items-center"
+      >
         <Lottie
           className="w-[62px] h-auto"
           animationData={headerLogo}
@@ -27,15 +30,15 @@ const Header = () => {
       </Link>
 
       {user ? (
-        <nav className={`${toggle == true ? "opened" : "closed"} navbar`}>
+        <nav className={`${toggle == true ? 'opened' : 'closed'} navbar`}>
           <ul className="flex gap-6 items-center">
             <li>
               <Link
                 to="/watchlist"
                 className="header-link font-primaryFont text-[18px] text-slate-800 tracking-wide	 font-bold "
               >
-                {" "}
-                Watch List{" "}
+                {' '}
+                Watch List{' '}
               </Link>
             </li>
             <li>
@@ -43,8 +46,8 @@ const Header = () => {
                 to="/watchedlist"
                 className="header-link font-primaryFont tracking-wide	 text-[18px] text-slate-800 font-bold "
               >
-                {" "}
-                Watched List{" "}
+                {' '}
+                Watched List{' '}
               </Link>
             </li>
 
@@ -59,7 +62,7 @@ const Header = () => {
       ) : (
         <div
           className={`button-group flex gap-2 ${
-            toggle == true ? "opened" : ""
+            toggle == true ? 'opened' : ''
           }`}
         >
           <Link
@@ -101,7 +104,7 @@ const Header = () => {
         )}
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

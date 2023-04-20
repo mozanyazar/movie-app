@@ -74,7 +74,7 @@ function App() {
   };
 
   const getMoreData = async () => {
-    const q = query(collection(db, "cities"), where("country", "==", 'USA'));
+    const q = query(collection(db, "cities"), where("country", "==", "USA"));
     const querySnapshot = await getDocs(q);
     // getMore(querySnapshot);
     querySnapshot.forEach(async (doc) => {
@@ -100,7 +100,6 @@ function App() {
       <button onClick={addItem}>Click</button>
       <a href="/hello">homepae</a>
       <Home capital={capital} todos={todos} />
-      
     </div>
   );
 }
