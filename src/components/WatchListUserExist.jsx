@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { UserAuth } from "../store/AuthContext";
 import headerLogo from "../animations/headerLogo.json";
 import Lottie from "lottie-react";

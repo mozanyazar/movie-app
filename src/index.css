@@ -1,8 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Solitreo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 @layer components {
   .form-wrapper {
@@ -14,32 +12,15 @@
   .form-input {
     @apply bg-transparent border-b-2 border-slate-800 pl-2 py-1 outline-none  text-slate-900 italic;
   }
-}
-* {
+
+  * {
   margin: 0;
   padding: 0;
   text-decoration: none;
   list-style-type: none;
 }
 
-/* header */
-
-/* body {
-  font-family: "Solitreo", cursive;
-} */
-
 .background-gradiant {
-  /* background: #ddd6f3;
-  background: -webkit-linear-gradient(
-    to right,
-    #faaca8,
-    #ddd6f3
-  ); 
-  background: linear-gradient(
-    to right,
-    #faaca8,
-    #ddd6f3
-  );  */
   position: relative;
   width: 100%;
   height: calc(100vh - 70px);
@@ -107,3 +88,5 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+}
+

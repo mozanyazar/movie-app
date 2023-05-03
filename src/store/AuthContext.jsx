@@ -9,8 +9,6 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../firebase'
 import {
-  collection,
-  addDoc,
   setDoc,
   doc,
   Timestamp,

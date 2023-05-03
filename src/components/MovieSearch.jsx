@@ -1,7 +1,4 @@
 import React, { useState } from 'react'
-import Lottie from 'lottie-react'
-import WomanMovie from '../animations/WomanMovie.json'
-import WomanMovie2 from '../animations/WomanMovie2.json'
 import { useNavigate } from 'react-router-dom'
 import { UserAuth } from '../store/AuthContext'
 

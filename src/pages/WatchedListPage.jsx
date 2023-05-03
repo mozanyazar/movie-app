@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import WatchedListUserExist from '../components/WatchedListUserExist'
 import { UserAuth } from '../store/AuthContext'
 import { Navigate } from 'react-router-dom'

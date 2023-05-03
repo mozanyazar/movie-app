@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { useState } from 'react'
 import { UserAuth } from '../store/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import bgImage from '../pics/movie-bg.jpg'
+
+
 const CreateAccount = () => {
-  const { createUser, isUser } = UserAuth()
+  const { createUser } = UserAuth()
   const navigate = useNavigate()
 
   const handleFormSubmit = async (values, actions) => {

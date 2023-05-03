@@ -1,24 +1,21 @@
-import React, { useContext, useState, useEffect } from 'react'
-import * as yup from 'yup'
+import React, { useState } from 'react'
 import { UserAuth } from '../store/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
-  const { SignInWithEmail, user } = UserAuth()
+  const { SignInWithEmail } = UserAuth()
   const navigate = useNavigate()
   const [Singinemail, setSigninEmail] = useState('')
   const [Signinpassword, setSigninPassword] = useState('')
 
   const SignInHandler = async (e) => {
     e.preventDefault()
-    console.log(Singinemail)
-    console.log(Signinpassword)
 
     try {
       console.log('islem devm ediyor')
       await SignInWithEmail(Singinemail, Signinpassword)
     } catch (err) {
-      console.log(err.message)
+      throw new Error(err)
     }
   }
 

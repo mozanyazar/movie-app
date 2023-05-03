@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { UserAuth } from '../store/AuthContext'
 import { WatchListStore } from '../store/WatchListContext'
 
