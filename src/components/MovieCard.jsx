@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ApiStore } from '../store/ApiContext'
 import { UserAuth } from '../store/AuthContext'
 import { WatchListStore } from '../store/WatchListContext'
 
 const MovieCard = ({ movie }) => {
-  const { topRatedMovies, setTopRatedMovies } = ApiStore()
   const { WatchListHandler } = WatchListStore()
   const { watchList, user, watchedList } = UserAuth()
   const [isValid, setIsValid] = useState({

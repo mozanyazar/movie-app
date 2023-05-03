@@ -112,7 +112,7 @@ export const SearchPage = () => {
                     Add Watch List
                   </button>
                   <button
-                    onClick={() => navigate(`/movies/${el.title}/${el.id}`)}
+                    onClick={() => navigate(`/movies/${el.name}/${el.id}`)}
                     className="bg-gradient-to-r from-slate-400 to-stone-800 transition-all duration-150 ease-out text-white border-2 border-slate-300  font-semibold py-2 px-4 rounded-2xl shadow-lg hover:scale-105  max-[900px]:text-sm max-[420px]:text-[12px]"
                   >
                     Read More

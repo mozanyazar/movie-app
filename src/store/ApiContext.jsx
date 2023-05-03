@@ -1,9 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import { UserAuth } from './AuthContext'
 const ApiContext = createContext()
 
 export const ApiContextProvider = ({ children }) => {
-  const { user } = UserAuth()
   const [movieSlider, setMovieSlider] = useState({})
   const [topRatedMovies, setTopRatedMovies] = useState({})
   const [sliderLoading, setSliderLoading] = useState(false)
@@ -17,7 +15,7 @@ export const ApiContextProvider = ({ children }) => {
       const data = await res.json()
       setTopRatedMovies(data.results)
     } catch (e) {
-      console.log(e.message)
+      throw new Error(e)
     }
   }
 
@@ -31,7 +29,8 @@ export const ApiContextProvider = ({ children }) => {
       setSliderLoading(true)
       fetchCards()
     } catch (error) {
-      console.log(error)
+      throw new Error(error)
+
     }
   }
 

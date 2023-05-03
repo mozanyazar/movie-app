@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React from 'react'
 import { ApiStore } from '../store/ApiContext'
-import { UserAuth } from '../store/AuthContext'
-import { WatchListStore } from '../store/WatchListContext'
 import MovieCard from './MovieCard'
 
 const MoviesCards = () => {
-  const { topRatedMovies, setTopRatedMovies } = ApiStore()
-  const { WatchListHandler } = WatchListStore()
+  const { topRatedMovies } = ApiStore()
 
   return (
     <div>

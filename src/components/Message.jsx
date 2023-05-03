@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { UserAuth } from '../store/AuthContext'
-import { AiFillCloseCircle } from 'react-icons/ai'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 

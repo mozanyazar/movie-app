@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { UserAuth } from '../store/AuthContext'
 import headerLogo from '../animations/headerLogo.json'
 import Lottie from 'lottie-react'
 import { WatchListStore } from '../store/WatchListContext'
 const WatchedListUserExist = () => {
-  const { watchedList, user } = UserAuth()
+  const { watchedList } = UserAuth()
   const { removeTheWatchedList } = WatchListStore()
 
   return (

@@ -1,13 +1,9 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext } from 'react'
 import { UserAuth } from './AuthContext'
 import {
   doc,
   updateDoc,
   arrayUnion,
-  getDoc,
-  deleteField,
-  arrayRemove,
-  setDoc,
 } from 'firebase/firestore'
 import { db } from '../firebase'
 
@@ -34,9 +30,8 @@ export const WatchListContextProvider = ({ children }) => {
     })
       .then(() => {
         setMessage({
-          message: `${
-            movie.original_title ? movie.original_title : movie.name
-          } has been removed to watched list`,
+          message: `${movie.original_title ? movie.original_title : movie.name
+            } has been removed to watched list`,
           isSucces: true,
         })
       })
@@ -59,9 +54,8 @@ export const WatchListContextProvider = ({ children }) => {
     })
       .then(() => {
         setMessage({
-          message: `${
-            movie.original_title ? movie.original_title : movie.name
-          } has been removed to watch list`,
+          message: `${movie.original_title ? movie.original_title : movie.name
+            } has been removed to watch list`,
           isSucces: true,
         })
       })

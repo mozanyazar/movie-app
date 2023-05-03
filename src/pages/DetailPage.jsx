@@ -1,5 +1,4 @@
-import { async } from '@firebase/util'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import DetailComments from '../components/DetailComments'
 import DetailContent from '../components/DetailContent'
@@ -8,7 +7,7 @@ import { UserAuth } from '../store/AuthContext'
 
 const DetailPage = () => {
   const { movieName, movieId } = useParams()
-  const { user, watchList } = UserAuth()
+  const { watchList } = UserAuth()
   const [detailMovie, setDetailMovie] = useState({})
   const [loading, setLoading] = useState(false)
 

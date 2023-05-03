@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { UserAuth } from '../store/AuthContext'
 import '../css/Header.css'
 import { TfiMenu, TfiClose } from 'react-icons/tfi'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import headerLogo from '../animations/headerLogo.json'
 import Lottie from 'lottie-react'
@@ -61,9 +61,8 @@ const Header = () => {
         </nav>
       ) : (
         <div
-          className={`button-group flex gap-2 ${
-            toggle == true ? 'opened' : ''
-          }`}
+          className={`button-group flex gap-2 ${toggle == true ? 'opened' : ''
+            }`}
         >
           <Link
             to="/createAccount"
